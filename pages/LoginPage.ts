@@ -9,14 +9,13 @@ export class LoginPage {
   }
 
   async navigateTo() {
-    await this.page.goto("https://github.com/login");
+    await this.page.goto("https://demo.learnwebdriverio.com/login");
   }
 
   async login() {
     const authData = getAuthData();
-
-    await this.page.fill("#login_field", authData.email);
-    await this.page.fill("#password", authData.password);
-    await this.page.click('[value="Sign in"]');
+    await this.page.getByPlaceholder(`Email`).fill(authData.email);
+    await this.page.getByPlaceholder(`Password`).fill(authData.password);
+    await this.page.click("//button");
   }
 }

@@ -7,6 +7,7 @@ test("auth to github - check that you logged", async ({ page, context }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.navigateTo();
+
   await expect(page.locator(".AppHeader-user")).toBeVisible();
 });
 
