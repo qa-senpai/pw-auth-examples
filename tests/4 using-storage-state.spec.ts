@@ -1,14 +1,16 @@
 import { expect, test } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 
-// test.use({ storageState: ".auth/user.json" });
+test.use({ storageState: ".auth/user.json" });
 
 test("auth to github - check that you logged", async ({ page, context }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.navigateTo();
 
-  await expect(page.locator(".AppHeader-user")).toBeVisible();
+  await expect(
+    page.locator(`[data-qa-id="site-nav"] [href = '/@coach/']`)
+  ).toBeVisible();
 });
 
 // показати використання кукі з тесту test.use({ storageState: ".auth/user.json" });

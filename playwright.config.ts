@@ -28,14 +28,21 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    // baseURL: "https://demo.learnwebdriverio.com",
     // storageState: ".auth/user.json",
   },
 
   /* Configure projects for major browsers */
   projects: [
+    // Setup project
+    // { name: "setup", testMatch: /.*\.setup\.ts/ },
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        // storageState: ".auth/user.json",
+      },
+      // dependencies: ["setup"],
     },
 
     // {

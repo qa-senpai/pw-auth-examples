@@ -18,28 +18,6 @@ export const test = base.extend<MyFixtures>({
 
     await use(page);
   },
-
-  storageState: async ({ browser, userToLogin }, use) => {
-    if (userToLogin) {
-      const fileName = `./.auth/${userToLogin}.json` as string;
-
-      if (!fs.existsSync(fileName)) {
-        const page = await browser.newPage({ storageState: undefined });
-        const loginPage = new LoginPage(page);
-
-        await loginPage.navigateTo();
-        await loginPage.login();
-        await page.context().storageState({
-          path: fileName,
-        });
-        await page.close();
-      }
-
-      await use(fileName);
-    } else {
-      await use(undefined);
-    }
-  },
 });
 
 export { expect } from "@playwright/test";

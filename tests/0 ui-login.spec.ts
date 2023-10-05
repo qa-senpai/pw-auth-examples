@@ -2,18 +2,18 @@ import { expect, test } from "@playwright/test";
 import { getAuthData } from "../utils";
 import { LoginPage } from "../pages/LoginPage";
 
-const authData = getAuthData();
-
 // базовий спосіб - в кожному тесті ми переходимо і логінемось
 test("auth to github - basic", async ({ page }) => {
-  await page.goto("https://github.com/login");
+  await page.goto("https://demo.learnwebdriverio.com/login");
 
-  // Method 1: Username and Password
-  await page.fill("#login_field", authData.email);
-  await page.fill("#password", authData.password);
-  await page.click('[value="Sign in"]');
+  const authData = getAuthData();
+  await page.getByPlaceholder(`Email`).fill(authData.email);
+  await page.getByPlaceholder(`Password`).fill(authData.password);
+  await page.click("//button");
 
-  await expect(page.locator(".AppHeader-user")).toBeVisible();
+  await expect(
+    page.locator(`[data-qa-id="site-nav"] [href = '/@coach/']`)
+  ).toBeVisible();
 });
 
 // базовий метод, але з інкапсуляцією в ПОМ
